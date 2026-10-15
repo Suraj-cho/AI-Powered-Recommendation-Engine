@@ -260,15 +260,3 @@ the Markdown preview for the Mermaid diagrams embedded in this README.
 -   Expand the dataset and evaluate recommendation quality across all
     categories.
 
-## Security Notes
-
--   Keep `.env` out of version control.
--   Prefer read-only database access for recommendation queries.
--   Validate SQL operations and restrict permitted query types.
--   Do not expose credentials or sensitive configuration in API
-    responses.
-
-## License
-
-Add the license appropriate for your project before publishing or
-distributing the repository.
