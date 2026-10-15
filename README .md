@@ -260,3 +260,5 @@ the Markdown preview for the Mermaid diagrams embedded in this README.
 -   Expand the dataset and evaluate recommendation quality across all
     categories.
 
+### Application Interface
+![Application Screenshot 1](1.png)
