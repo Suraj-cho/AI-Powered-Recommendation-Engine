@@ -48,7 +48,7 @@ interpret the request and query the listings database.
   Listing data             Structured rows with JSON attributes
 
 ## Architecture
-
+![Workflow Diagram](workflow.png)
 ``` mermaid
 flowchart TD
     U["User"] --> UI["Frontend<br/>static/index.html"]
