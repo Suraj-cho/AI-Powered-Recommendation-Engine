@@ -262,3 +262,5 @@ the Markdown preview for the Mermaid diagrams embedded in this README.
 
 ### Application Interface
 ![Application Screenshot 1](1.png)
+
+![Application Screenshot 1](2.png)
