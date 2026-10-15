@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Listing Recommendation Engine</title>
+<style>
+:root{font-family:Inter,system-ui,Arial,sans-serif;color:#182230;background:#f4f7fb}
+*{box-sizing:border-box}body{margin:0}.wrap{max-width:980px;margin:40px auto;padding:20px}
+.hero{background:#172554;color:white;padding:28px;border-radius:18px}.hero h1{margin:0 0 8px;font-size:clamp(24px,4vw,36px)}.hero p{margin:0;color:#dbeafe}
+.panel{background:white;border:1px solid #e1e7ef;border-radius:16px;padding:20px;margin-top:18px;box-shadow:0 8px 24px #0f172a0a}
+label{display:block;font-weight:650;margin-bottom:8px}textarea{width:100%;min-height:105px;padding:13px;border:1px solid #cbd5e1;border-radius:10px;font:inherit;resize:vertical}
+button{border:0;background:#2563eb;color:white;border-radius:10px;padding:12px 18px;font:inherit;font-weight:700;cursor:pointer;margin-top:12px}button:disabled{opacity:.6;cursor:wait}.hint{color:#64748b;font-size:13px;margin-top:8px}.status{margin:14px 0;color:#475569}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}.listing{border:1px solid #e2e8f0;border-radius:14px;padding:16px;background:white}.top{display:flex;justify-content:space-between;gap:12px}.price{font-weight:800;color:#1d4ed8;white-space:nowrap}.price small{font-weight:500;color:#64748b}.meta{color:#64748b;font-size:13px;margin:8px 0}.pill{display:inline-block;background:#eff6ff;color:#1d4ed8;border-radius:999px;padding:4px 8px;font-size:12px;margin:3px 3px 0 0}.listing ul{padding-left:20px;color:#334155;font-size:14px}.error{color:#b91c1c}.empty{padding:16px;background:#fff7ed;border-radius:10px;color:#9a3412}.ask{padding:16px;background:#eff6ff;border-radius:10px;color:#1e3a8a}
+.attrs{display:grid;grid-template-columns:auto 1fr;gap:3px 12px;font-size:13px;margin:8px 0}.attrs dt{color:#64748b}.attrs dd{margin:0;color:#182230}.badge{display:inline-block;border-radius:999px;padding:3px 9px;font-size:12px;font-weight:650}.ok{background:#dcfce7;color:#166534}.no{background:#fee2e2;color:#991b1b}.lbl{font-size:12px;color:#64748b;margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="hero"><h1>AI Listing Recommendation Engine</h1><p>Describe what you need. Get relevant listings from a real SQLite dataset.</p></header>
+  <section class="panel">
+    <label for="query">What are you looking for?</label>
+    <textarea id="query" placeholder="Example: Find a room in Pune under ₹15,000, or a remote Python developer job, or an electric car with range above 300 km."></textarea>
+    <button id="search">Find recommendations</button>
+    <div class="hint">The prototype uses an LLM to interpret your request and a safe, parameterized SQL search to retrieve listings.</div>
+  </section>
+  <section class="panel"><h2>Results</h2><div id="status" class="status">Enter a request to begin.</div><div id="results" class="cards"></div></section>
+</div>
+<script>
+const queryEl=document.getElementById('query'), button=document.getElementById('search'), statusEl=document.getElementById('status'), resultsEl=document.getElementById('results');
+function escapeHtml(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+// ---- generic listing rendering (works for any category) START ----
+const HIDDEN_KEYS=new Set(['id','name','category','data','score','reasons','description','availability','is_available','location']);
+const MONEY_RE=/(^|_)(price|salary|cost|fee|rent|budget)(_|$)/i;
+const UNIT_WORDS={gb:'GB',mb:'MB',kmpl:'km/l',km:'km',mp:'MP',mah:'mAh',sqft:'sq ft',ram:'RAM',ev:'EV',id:'ID'};
+const isNum=v=>typeof v==='number'&&Number.isFinite(v);
+const isEmpty=v=>v===null||v===undefined||v===''||(Array.isArray(v)&&v.length===0)||(typeof v==='number'&&!Number.isFinite(v));
+const humanize=k=>String(k).split('_').filter(Boolean).map(w=>UNIT_WORDS[w.toLowerCase()]||(w[0].toUpperCase()+w.slice(1))).join(' ');
+const money=n=>'₹'+n.toLocaleString('en-IN');
+function formatValue(key,v){
+  if(typeof v==='boolean')return v?'Yes':'No';
+  if(isNum(v))return MONEY_RE.test(key)?money(v):(/year/i.test(key)?String(v):v.toLocaleString('en-IN'));
+  if(typeof v==='object')return null;           // nested objects are not shown
+  return escapeHtml(v);
+}
+function listingData(x){return (x.data&&typeof x.data==='object')?x.data:x;}
+function headline(x){
+  const d=listingData(x);
+  const key=Object.keys(d).find(k=>MONEY_RE.test(k)&&!/_period$/i.test(k)&&isNum(d[k]));
+  if(!key)return {key:null,html:''};
+  const period=d[key+'_period'];
+  const suffix=(typeof period==='string'&&period&&!['total','one-time','once'].includes(period.toLowerCase()))?` <small>/ ${escapeHtml(period)}</small>`:'';
+  return {key,html:`<span class="price">${money(d[key])}${suffix}</span>`};
+}
+function availabilityBadge(x){
+  const d=listingData(x);
+  const v=d.availability!==undefined?d.availability:d.is_available;
+  if(v===undefined||v===null)return '';
+  const yes=v===true||['true','yes','available','open','1'].includes(String(v).toLowerCase());
+  return `<span class="badge ${yes?'ok':'no'}">${yes?'Available':'Unavailable'}</span>`;
+}
+function renderListing(x){
+  const d=listingData(x), head=headline(x);
+  const skip=k=>HIDDEN_KEYS.has(k)||k===head.key||/_period$/i.test(k);
+  const entries=Object.entries(d).filter(([k,v])=>!skip(k)&&!isEmpty(v));
+  const lists=entries.filter(([,v])=>Array.isArray(v));
+  const scalars=entries.filter(([,v])=>!Array.isArray(v)).map(([k,v])=>[k,formatValue(k,v)]).filter(([,v])=>v!==null);
+  const meta=[d.location,x.category].filter(v=>!isEmpty(v)).map(escapeHtml).join(' · ');
+  const reasons=(x.reasons||[]);
+  return `<article class="listing">
+    <div class="top"><strong>${escapeHtml(x.name)}</strong>${head.html}</div>
+    <div class="meta">${meta}${meta?' · ':''}${availabilityBadge(x)}</div>
+    ${scalars.length?`<dl class="attrs">${scalars.map(([k,v])=>`<dt>${escapeHtml(humanize(k))}</dt><dd>${v}</dd>`).join('')}</dl>`:''}
+    ${lists.map(([k,v])=>`<div class="lbl">${escapeHtml(humanize(k))}</div><div>${v.map(i=>`<span class="pill">${escapeHtml(i)}</span>`).join('')}</div>`).join('')}
+    ${isEmpty(x.description)?'':`<p>${escapeHtml(x.description)}</p>`}
+    ${reasons.length?`<strong>Why it matches</strong><ul>${reasons.map(r=>`<li>${escapeHtml(r)}</li>`).join('')}</ul>`:''}
+  </article>`;
+}
+// ---- generic listing rendering END ----
+
+button.addEventListener('click',async()=>{
+ const query=queryEl.value.trim(); if(query.length<2){statusEl.textContent='Please enter a little more detail.';return;}
+ button.disabled=true;statusEl.textContent='Understanding your request and searching listings…';resultsEl.innerHTML='';
+ try{
+  const res=await fetch('/recommend',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({query})});
+  const data=await res.json();if(!res.ok)throw new Error(data.detail||'Request failed');
+  
+  
+statusEl.textContent = data.message || 'Search complete.';
+
+if (data.needs_clarification) {
+  resultsEl.innerHTML =
+    '<div class="ask">Please add a little more detail so I can search accurately.</div>';
+  return;
+}
+
+if (data.recommendations?.length) {
+  resultsEl.innerHTML = data.recommendations.map(renderListing).join('');
+} else if (data.answer) {
+  resultsEl.innerHTML =
+    '<article class="listing"><div class="answer"></div></article>';
+  resultsEl.querySelector('.answer').textContent = data.answer;
+} else {
+  resultsEl.innerHTML =
+    '<div class="empty">No recommendations found. Try changing your constraints.</div>';
+}
+
+
+  statusEl.textContent = data.message || 'Search complete.';
+
+  if (data.needs_clarification) {
+    resultsEl.innerHTML =
+      '<div class="ask">Please add a little more detail so I can search accurately.</div>';
+    return;
+  }
+
+  if (!data.recommendations?.length) {
+    resultsEl.innerHTML =
+      '<div class="empty">No recommendations returned. Try changing your constraints.</div>';
+    return;
+  }
+
+  resultsEl.innerHTML = data.recommendations.map(renderListing).join('');
+
+ }catch(e){statusEl.innerHTML='<span class="error">'+escapeHtml(e.message)+'</span>';}
+ finally{button.disabled=false;}
+});
+queryEl.value='Find an available meeting room in Pune for at least 8 people under ₹3,000 with Wi-Fi.';
+</script>
+</body>
+</html>

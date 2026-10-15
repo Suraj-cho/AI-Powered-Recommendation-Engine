@@ -1,0 +1,554 @@
+[
+  {
+    "name": "Furnished 1BHK in Hinjewadi",
+    "category": "room",
+    "data": {
+      "location": "Pune",
+      "price": 14000,
+      "price_period": "month",
+      "bedrooms": 1,
+      "furnished": true,
+      "area_sqft": 650,
+      "availability": true,
+      "features": [
+        "parking",
+        "Wi-Fi",
+        "security"
+      ]
+    }
+  },
+  {
+    "name": "Shared Room near Baner",
+    "category": "room",
+    "data": {
+      "location": "Pune",
+      "price": 6500,
+      "price_period": "month",
+      "bedrooms": 1,
+      "furnished": true,
+      "area_sqft": 300,
+      "availability": true,
+      "features": [
+        "Wi-Fi",
+        "laundry"
+      ]
+    }
+  },
+  {
+    "name": "Family 2BHK Apartment",
+    "category": "room",
+    "data": {
+      "location": "Mumbai",
+      "price": 28000,
+      "price_period": "month",
+      "bedrooms": 2,
+      "furnished": false,
+      "area_sqft": 950,
+      "availability": true,
+      "features": [
+        "parking",
+        "balcony",
+        "security"
+      ]
+    }
+  },
+  {
+    "name": "Student PG Accommodation",
+    "category": "room",
+    "data": {
+      "location": "Hyderabad",
+      "price": 8000,
+      "price_period": "month",
+      "bedrooms": 1,
+      "furnished": true,
+      "area_sqft": 250,
+      "availability": true,
+      "features": [
+        "meals",
+        "Wi-Fi",
+        "laundry"
+      ]
+    }
+  },
+  {
+    "name": "Premium Studio Apartment",
+    "category": "room",
+    "data": {
+      "location": "Bengaluru",
+      "price": 22000,
+      "price_period": "month",
+      "bedrooms": 1,
+      "furnished": true,
+      "area_sqft": 500,
+      "availability": false,
+      "features": [
+        "gym",
+        "pool",
+        "security"
+      ]
+    }
+  },
+  {
+    "name": "Lakeview Business Hotel",
+    "category": "hotel",
+    "data": {
+      "location": "Pune",
+      "price": 4200,
+      "price_period": "night",
+      "rating": 4.5,
+      "room_type": "Deluxe",
+      "breakfast_included": true,
+      "availability": true,
+      "features": [
+        "Wi-Fi",
+        "breakfast",
+        "parking"
+      ]
+    }
+  },
+  {
+    "name": "Airport Comfort Inn",
+    "category": "hotel",
+    "data": {
+      "location": "Mumbai",
+      "price": 3500,
+      "price_period": "night",
+      "rating": 4.1,
+      "room_type": "Standard",
+      "breakfast_included": false,
+      "availability": true,
+      "features": [
+        "airport shuttle",
+        "Wi-Fi"
+      ]
+    }
+  },
+  {
+    "name": "Royal Heritage Stay",
+    "category": "hotel",
+    "data": {
+      "location": "Jaipur",
+      "price": 6000,
+      "price_period": "night",
+      "rating": 4.7,
+      "room_type": "Suite",
+      "breakfast_included": true,
+      "availability": true,
+      "features": [
+        "pool",
+        "restaurant",
+        "Wi-Fi"
+      ]
+    }
+  },
+  {
+    "name": "Budget City Lodge",
+    "category": "hotel",
+    "data": {
+      "location": "Hyderabad",
+      "price": 1800,
+      "price_period": "night",
+      "rating": 3.8,
+      "room_type": "Standard",
+      "breakfast_included": false,
+      "availability": true,
+      "features": [
+        "Wi-Fi",
+        "24-hour reception"
+      ]
+    }
+  },
+  {
+    "name": "Garden Boutique Hotel",
+    "category": "hotel",
+    "data": {
+      "location": "Bengaluru",
+      "price": 5200,
+      "price_period": "night",
+      "rating": 4.6,
+      "room_type": "Deluxe",
+      "breakfast_included": true,
+      "availability": false,
+      "features": [
+        "garden",
+        "restaurant",
+        "Wi-Fi"
+      ]
+    }
+  },
+  {
+    "name": "Maruti Swift Petrol",
+    "category": "car",
+    "data": {
+      "location": "Pune",
+      "price": 650000,
+      "price_period": "total",
+      "brand": "Maruti Suzuki",
+      "year": 2022,
+      "transmission": "manual",
+      "fuel_type": "petrol",
+      "mileage_kmpl": 22,
+      "seats": 5,
+      "availability": true,
+      "features": [
+        "Bluetooth",
+        "parking sensors"
+      ]
+    }
+  },
+  {
+    "name": "Hyundai Creta Diesel",
+    "category": "car",
+    "data": {
+      "location": "Mumbai",
+      "price": 1250000,
+      "price_period": "total",
+      "brand": "Hyundai",
+      "year": 2023,
+      "transmission": "automatic",
+      "fuel_type": "diesel",
+      "mileage_kmpl": 18,
+      "seats": 5,
+      "availability": true,
+      "features": [
+        "reverse camera",
+        "cruise control"
+      ]
+    }
+  },
+  {
+    "name": "Tata Nexon EV",
+    "category": "car",
+    "data": {
+      "location": "Pune",
+      "price": 1450000,
+      "price_period": "total",
+      "brand": "Tata",
+      "year": 2024,
+      "transmission": "automatic",
+      "fuel_type": "electric",
+      "range_km": 325,
+      "seats": 5,
+      "availability": true,
+      "features": [
+        "fast charging",
+        "reverse camera"
+      ]
+    }
+  },
+  {
+    "name": "Honda City Petrol",
+    "category": "car",
+    "data": {
+      "location": "Hyderabad",
+      "price": 950000,
+      "price_period": "total",
+      "brand": "Honda",
+      "year": 2021,
+      "transmission": "automatic",
+      "fuel_type": "petrol",
+      "mileage_kmpl": 17,
+      "seats": 5,
+      "availability": true,
+      "features": [
+        "sunroof",
+        "cruise control"
+      ]
+    }
+  },
+  {
+    "name": "Mahindra Thar 4x4",
+    "category": "car",
+    "data": {
+      "location": "Bengaluru",
+      "price": 1600000,
+      "price_period": "total",
+      "brand": "Mahindra",
+      "year": 2024,
+      "transmission": "manual",
+      "fuel_type": "diesel",
+      "mileage_kmpl": 15,
+      "seats": 4,
+      "availability": false,
+      "features": [
+        "four-wheel drive",
+        "touchscreen"
+      ]
+    }
+  },
+  {
+    "name": "Junior Data Analyst",
+    "category": "job",
+    "data": {
+      "location": "Pune",
+      "salary": 450000,
+      "salary_period": "year",
+      "experience_years": 0,
+      "work_mode": "hybrid",
+      "openings": 3,
+      "availability": true,
+      "skills": [
+        "SQL",
+        "Excel",
+        "Power BI",
+        "Python"
+      ]
+    }
+  },
+  {
+    "name": "Machine Learning Intern",
+    "category": "job",
+    "data": {
+      "location": "Mumbai",
+      "salary": 18000,
+      "salary_period": "month",
+      "experience_years": 0,
+      "work_mode": "onsite",
+      "openings": 2,
+      "availability": true,
+      "skills": [
+        "Python",
+        "scikit-learn",
+        "pandas",
+        "ML"
+      ]
+    }
+  },
+  {
+    "name": "Generative AI Engineer",
+    "category": "job",
+    "data": {
+      "location": "Bengaluru",
+      "salary": 900000,
+      "salary_period": "year",
+      "experience_years": 1,
+      "work_mode": "hybrid",
+      "openings": 1,
+      "availability": true,
+      "skills": [
+        "Python",
+        "LLMs",
+        "RAG",
+        "LangGraph"
+      ]
+    }
+  },
+  {
+    "name": "Remote Python Developer",
+    "category": "job",
+    "data": {
+      "location": "Remote",
+      "salary": 600000,
+      "salary_period": "year",
+      "experience_years": 0,
+      "work_mode": "remote",
+      "openings": 4,
+      "availability": true,
+      "skills": [
+        "Python",
+        "FastAPI",
+        "SQL",
+        "Git"
+      ]
+    }
+  },
+  {
+    "name": "Senior Data Scientist",
+    "category": "job",
+    "data": {
+      "location": "Hyderabad",
+      "salary": 1800000,
+      "salary_period": "year",
+      "experience_years": 5,
+      "work_mode": "onsite",
+      "openings": 1,
+      "availability": false,
+      "skills": [
+        "Python",
+        "statistics",
+        "machine learning",
+        "SQL"
+      ]
+    }
+  },
+  {
+    "name": "Lenovo ThinkPad Laptop",
+    "category": "electronics",
+    "data": {
+      "location": "Online",
+      "price": 72000,
+      "brand": "Lenovo",
+      "ram_gb": 16,
+      "storage_gb": 512,
+      "processor": "Intel Core i7",
+      "battery_life_hours": 10,
+      "availability": true,
+      "features": [
+        "SSD",
+        "Wi-Fi 6",
+        "fingerprint reader"
+      ]
+    }
+  },
+  {
+    "name": "Budget Student Laptop",
+    "category": "electronics",
+    "data": {
+      "location": "Online",
+      "price": 38000,
+      "brand": "Acer",
+      "ram_gb": 8,
+      "storage_gb": 512,
+      "processor": "Intel Core i5",
+      "battery_life_hours": 7,
+      "availability": true,
+      "features": [
+        "SSD",
+        "webcam"
+      ]
+    }
+  },
+  {
+    "name": "Samsung Galaxy Smartphone",
+    "category": "electronics",
+    "data": {
+      "location": "Online",
+      "price": 42000,
+      "brand": "Samsung",
+      "ram_gb": 8,
+      "storage_gb": 256,
+      "battery_capacity_mah": 5000,
+      "availability": true,
+      "features": [
+        "5G",
+        "AMOLED display",
+        "fast charging"
+      ]
+    }
+  },
+  {
+    "name": "Mirrorless Creator Camera",
+    "category": "electronics",
+    "data": {
+      "location": "Online",
+      "price": 89000,
+      "brand": "Sony",
+      "resolution_mp": 24,
+      "video_resolution": "4K",
+      "availability": true,
+      "features": [
+        "image stabilization",
+        "Wi-Fi",
+        "Bluetooth"
+      ]
+    }
+  },
+  {
+    "name": "Long Battery Tablet",
+    "category": "electronics",
+    "data": {
+      "location": "Online",
+      "price": 28000,
+      "brand": "Xiaomi",
+      "ram_gb": 8,
+      "storage_gb": 128,
+      "battery_capacity_mah": 8000,
+      "availability": false,
+      "features": [
+        "stylus support",
+        "quad speakers"
+      ]
+    }
+  },
+  {
+    "name": "Python for Data Analysis",
+    "category": "course",
+    "data": {
+      "location": "Online",
+      "price": 2999,
+      "price_period": "one-time",
+      "duration_weeks": 6,
+      "level": "beginner",
+      "delivery_mode": "online",
+      "availability": true,
+      "skills": [
+        "Python",
+        "pandas",
+        "NumPy"
+      ]
+    }
+  },
+  {
+    "name": "Practical Machine Learning",
+    "category": "course",
+    "data": {
+      "location": "Online",
+      "price": 5999,
+      "price_period": "one-time",
+      "duration_weeks": 10,
+      "level": "intermediate",
+      "delivery_mode": "online",
+      "availability": true,
+      "skills": [
+        "Python",
+        "scikit-learn",
+        "model evaluation"
+      ]
+    }
+  },
+  {
+    "name": "Generative AI and RAG",
+    "category": "course",
+    "data": {
+      "location": "Online",
+      "price": 7999,
+      "price_period": "one-time",
+      "duration_weeks": 8,
+      "level": "intermediate",
+      "delivery_mode": "online",
+      "availability": true,
+      "skills": [
+        "LLMs",
+        "embeddings",
+        "vector databases",
+        "RAG"
+      ]
+    }
+  },
+  {
+    "name": "SQL and Business Intelligence",
+    "category": "course",
+    "data": {
+      "location": "Online",
+      "price": 2499,
+      "price_period": "one-time",
+      "duration_weeks": 4,
+      "level": "beginner",
+      "delivery_mode": "online",
+      "availability": true,
+      "skills": [
+        "SQL",
+        "Power BI",
+        "dashboards"
+      ]
+    }
+  },
+  {
+    "name": "Advanced Deep Learning",
+    "category": "course",
+    "data": {
+      "location": "Online",
+      "price": 9999,
+      "price_period": "one-time",
+      "duration_weeks": 12,
+      "level": "advanced",
+      "delivery_mode": "online",
+      "availability": false,
+      "skills": [
+        "PyTorch",
+        "neural networks",
+        "computer vision"
+      ]
+    }
+  }
+]
