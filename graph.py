@@ -27,9 +27,9 @@ from recom_agent import (
 logger = logging.getLogger(__name__)
 
 
-# ---------------------------------------------------------------------------
+
 # LLM AND TOOLS
-# ---------------------------------------------------------------------------
+
 
 def make_llm():
     api_key = os.getenv("GROQ_API_KEY")
@@ -93,9 +93,9 @@ def make_tools(llm):
     return schema_tools + [safe_sql_query]
 
 
-# ---------------------------------------------------------------------------
+
 # LANGGRAPH WORKFLOW
-# ---------------------------------------------------------------------------
+
 
 class RecommendationState(MessagesState, total=False):
     """Shared state passed between graph nodes."""
