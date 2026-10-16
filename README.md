@@ -418,6 +418,16 @@ Your request is broad. Could you tell me the expected capacity and budget for th
 
 ---
 
+## 🖥 UI Preview
+
+<div align="center">
+
+![UI Screenshot](docs/ui-screenshot.png)
+
+*Search box with recommendation cards*
+
+</div>
+
 <div align="center">
 
 Built with **LangGraph · Groq · SQLite · Pydantic**
