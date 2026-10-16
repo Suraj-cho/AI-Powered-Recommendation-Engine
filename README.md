@@ -422,7 +422,8 @@ Your request is broad. Could you tell me the expected capacity and budget for th
 
 <div align="center">
 
-![UI Screenshot](docs/ui-screenshot.png)
+
+![UI Screenshot](ui-screenshot.png)
 
 *Search box with recommendation cards*
 
