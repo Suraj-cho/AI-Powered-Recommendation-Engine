@@ -124,5 +124,5 @@ The initial testing indicates that the prototype can handle the tested natural-l
 
 **Edge Cases Accepted:** 6 out of 6 tested edge cases.
 
-**Note:** The remaining queries from the first four sections have not yet been confirmed as tested.
+
 
